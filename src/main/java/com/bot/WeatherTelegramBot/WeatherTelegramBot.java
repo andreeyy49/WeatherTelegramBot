@@ -26,16 +26,17 @@ public class WeatherTelegramBot implements WebhookBot {
     private final WeatherService weatherService;
     private final WeatherSender weatherSender;
 
-    @Override
     public BotApiMethod<?> onWebhookUpdateReceived(Update update) {
-        if (update.hasMessage() && update.getMessage().hasLocation()) {
-            String chatId = update.getMessage().getChatId().toString();
-            double lat = update.getMessage().getLocation().getLatitude();
-            double lon = update.getMessage().getLocation().getLongitude();
-
-            String weatherInfo = weatherService.getCurrentWeather(lat + "," + lon);
-
-            weatherSender.sendTextMessage(chatId, weatherInfo);
+        if (update.hasMessage()) {
+            if (update.getMessage().hasLocation()) {
+                double lat = update.getMessage().getLocation().getLatitude();
+                double lon = update.getMessage().getLocation().getLongitude();
+                String weatherInfo = weatherService.getCurrentWeather(lat + "," + lon);
+                weatherSender.sendTextMessage(update.getMessage().getChatId(), weatherInfo);
+            } else if (update.getMessage().hasText()) {
+                String text = update.getMessage().getText();
+                weatherSender.sendTextMessage(update.getMessage().getChatId(), "Вы написали: " + text);
+            }
         }
         return null;
     }

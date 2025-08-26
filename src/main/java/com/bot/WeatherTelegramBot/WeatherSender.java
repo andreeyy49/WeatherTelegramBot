@@ -22,7 +22,7 @@ public class WeatherSender extends DefaultAbsSender {
         return botToken;
     }
 
-    public void sendTextMessage(String chatId, String text) {
+    public void sendTextMessage(Long chatId, String text) {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(text);
