@@ -1,13 +1,11 @@
 package com.bot.WeatherTelegramBot.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
+@ToString
 @Getter
 public class Location {
     String name;
