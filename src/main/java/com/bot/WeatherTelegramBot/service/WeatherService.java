@@ -34,7 +34,7 @@ public class WeatherService {
     public String getForecastWeather(String latLon) {
         WeatherResponse response = weatherApiClient.getForecastWeather(weatherKey, latLon, 1);
         log.info(response.toString());
-        List<Hour> hours = response.getForecast().getForecastday().getFirst().getHour();
+        List<Hour> hours = response.getForecast().getForecastday().get(0).getHour();
         List<Hour> every3Hour = IntStream.range(0, hours.size())
                 .filter(i -> i % 3 == 0)
                 .mapToObj(hours::get)
