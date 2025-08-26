@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: WeatherTelegramBot
+    url: ${APP_URL}
+
+telegram:
+  bot:
+    key: ${TELEGRAM_BOT_KEY}
+    username: swagaBotHypeWeatherBot
+    path: ${TELEGRAM_BOT_PATH:/telegram}
+
+weather:
+  api:
+    key: ${WEATHER_API_KEY}
+    url: http://api.weatherapi.com/v1
