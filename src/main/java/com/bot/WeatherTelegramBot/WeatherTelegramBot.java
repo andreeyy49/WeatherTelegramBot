@@ -31,11 +31,17 @@ public class WeatherTelegramBot implements WebhookBot {
             if (update.getMessage().hasLocation()) {
                 double lat = update.getMessage().getLocation().getLatitude();
                 double lon = update.getMessage().getLocation().getLongitude();
-                String weatherInfo = weatherService.getCurrentWeather(lat + "," + lon);
+                String weatherInfo = weatherService.getForecastWeather(lat + "," + lon);
                 weatherSender.sendTextMessage(update.getMessage().getChatId(), weatherInfo);
             } else if (update.getMessage().hasText()) {
                 String text = update.getMessage().getText();
-                weatherSender.sendTextMessage(update.getMessage().getChatId(), "Вы написали: " + text);
+                Long chatId = update.getMessage().getChatId();
+
+                if ("/start".equals(text)) {
+                    weatherSender.sendKeyboard(chatId);
+                } else {
+                    weatherSender.sendTextMessage(chatId, "Вы написали: " + text);
+                }
             }
         }
         return null;

@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface WeatherApiClient {
 
     @GetMapping("/current.json")
-    WeatherResponse getWeather(@RequestParam("key") String weatherKey,
-                               @RequestParam("q") String latLon);
+    WeatherResponse getCurrentWeather(@RequestParam("key") String weatherKey,
+                                      @RequestParam("q") String latLon);
+
+    @GetMapping("/forecast.json")
+    WeatherResponse getForecastWeather(@RequestParam("key") String weatherKey,
+                                       @RequestParam("q") String latLon,
+                                       @RequestParam("days") int days);
 }
